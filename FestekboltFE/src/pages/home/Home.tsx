@@ -1,32 +1,27 @@
-import { OrangeButton } from "../../components/orangeButton/OrangeButton"
-import { useState,useEffect } from "react"
-
+import { Slider } from "../../components/slider/Slider"
+import styles from "./Home.module.css"
 export const Home = () =>{
-    const [user, setUser] = useState<string>("")
-    const [user2, setUser2] = useState<string>("")
+    
 
-        useEffect(() => {
-            console.log("User state changed:", user);
+    const images:string[] = [
+        "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/236/200/300", "https://picsum.photos/id/235/200/300"
+    ]
 
-        },[user] );
-        
-    const adatok = {
-    gyumolcsok: ['alma', 'banán', 'narancs'],
-    zoldsegek: ['répa', 'paradicsom', 'uborka'],
-    italok: ['víz', 'kávé', 'tea']
-    }
-
+    
 
     return(
-        <>
-            <OrangeButton button_text = "kosár" />
-            <input type="text"
-                onChange={(e)=> setUser(e.target.value)} 
-            />
-             <input type="text"
-                onChange={(e)=> setUser2(e.target.value)} 
-            />
-            <p>{user}</p>
+        <>  
+        
+        <div className="home-container">
+
+            <div className={styles.sliderHomeContainer}>
+                <Slider images={images}/>
+            </div>
+
+        </div>
+           
+            
+           
             
         </>
     )
