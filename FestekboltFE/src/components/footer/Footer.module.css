@@ -1,0 +1,13 @@
+.footerContainer{
+background-color: rgb(68, 68, 68);
+color: aliceblue;
+padding: 5%;
+
+}
+
+.footerContent{
+    display: flex;
+    justify-content: center;
+    gap: 15%;
+}
+

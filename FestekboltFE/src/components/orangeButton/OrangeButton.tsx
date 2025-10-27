@@ -7,7 +7,7 @@ export const OrangeButton =({ button_text }: { button_text: string })=> {
                 color: 'white', 
                 padding: '10px 20px', 
                 border: 'none',
-                borderRadius: '5px'}}
+                }}
                 >
                     
                 {button_text}
