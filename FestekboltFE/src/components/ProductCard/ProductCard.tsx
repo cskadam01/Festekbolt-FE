@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { OrangeButton } from "../../components/orangeButton/OrangeButton";
 
 export const ProductCard = ({ 
     product_name, 
@@ -77,20 +78,14 @@ export const ProductCard = ({
                         +
                     </button>
                 </div>
-
-                <button style={{
-                    backgroundColor: '#ffb06c',
-                    color: 'white',
-                    padding: '10px 15px',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    width: '80%',
-                    display: 'block',
-                    margin: '0 auto'
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '15px 0'
                 }}>
-                    Kosárba
-                </button>
+                <OrangeButton button_text = "Kosárba" />
+                </div>
             </div>
         </>
     )
