@@ -1,5 +1,4 @@
-import { Slider } from "../../components/slider/Slider"
-import styles from "./Home.module.css"
+
 export const Home = () =>{
     
 
@@ -12,13 +11,7 @@ export const Home = () =>{
     return(
         <>  
         
-        <div className="home-container">
-
-            <div className={styles.sliderHomeContainer}>
-                <Slider images={images}/>
-            </div>
-
-        </div>
+      
            
             
            
