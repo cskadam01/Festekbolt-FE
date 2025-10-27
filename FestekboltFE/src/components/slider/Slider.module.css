@@ -1,0 +1,38 @@
+.wrapper {
+    height: 100%;
+    position: relative;
+  }
+  
+  .slide {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .arrowLeft,
+  .arrowRight {
+    background: hsla(79 0% 10.6% / 0.8);
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 1;
+    cursor: pointer;
+    font-style: bold;
+    font-size: 40px;
+    color: #fff;
+  }
+  
+  .arrowLeft {
+    left: 32px;
+  }
+  
+  .arrowRight {
+    right: 32px;
+  }
+  
+  .arrowIcon {
+    padding-top: 30%;
+  }
+  
