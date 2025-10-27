@@ -1,15 +1,12 @@
 
 
 export const Home = () =>{
- 
-        
-    
+
 
 
     return(
         <>
-            
-            
+
         </>
     )
 
