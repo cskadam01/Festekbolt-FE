@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { OrangeButton } from "../../components/orangeButton/OrangeButton";
+import { Link } from 'react-router-dom';
+type ProductCardProps = {
+    product_name: string;
+    product_image: string;
+    product_price: number;
+    product_available: boolean;
+};
 
-export const ProductCard = ({ 
-    product_name, 
-    product_image, 
-    product_price, 
-    product_available 
-}: { 
-    product_name: string, 
-    product_image: string, 
-    product_price: number, 
-    product_available: boolean 
-}) => {
+
+export const ProductCard = ({ product_name, product_image, product_price, product_available }: ProductCardProps) => {
     const [quantity, setQuantity] = useState(1);
 
     const handleDecrease = () => {
@@ -25,7 +23,7 @@ export const ProductCard = ({
     };
 
     return (
-        <>
+        <><Link to={"/product"}>
             <div style={{
                 width: "200px",
                 height: "320px",
@@ -87,6 +85,7 @@ export const ProductCard = ({
                 <OrangeButton button_text = "Kosárba" />
                 </div>
             </div>
+            </Link>
         </>
     )
 }

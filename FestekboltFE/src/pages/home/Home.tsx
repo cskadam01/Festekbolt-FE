@@ -1,3 +1,7 @@
+import { Footer } from "../../components/footer/Footer"
+import { ProductCard } from "../../components/ProductCard/ProductCard"
+import { Slider } from "../../components/slider/Slider"
+import style from "./Home.module.css"
 
 export const Home = () =>{
     
@@ -11,6 +15,17 @@ export const Home = () =>{
 
     return(
         <>
+        <div>
+            <div className={style.sliderHomeContainer}>
+            <Slider images={images}/>
+            </div>
+            <ProductCard product_name= "asd"
+                         product_image= "public\festek.jpg"
+                         product_price= {5000}
+                         product_available= {true}/>
+         <Footer/>
+        </div>
+         
         </>
     )
 
