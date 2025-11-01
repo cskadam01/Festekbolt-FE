@@ -1,6 +1,6 @@
 import styles from './ProductDetailView.module.css'
 import { OrangeButton } from '../orangeButton/OrangeButton';
-import { QuantityIndicators } from '../quantityButtons/quantityButtons';
+import { QuantityIndicators } from '../quantityButtons/QuantityButtons';
 import { useState } from 'react';
 
 type Paint = {

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./ProductDetail.module.css"
 import { ProductDetailView } from "../../components/productDetailView/PorductDetailView";
+import { ProductFeedBack } from "../../components/porductFeedBack/ProductFeedBack";
 type Paint = {
   id: number;
   termek_nev: string;
@@ -52,11 +53,17 @@ export const ProductDetail = () => {
     const specificcard = paint.find((paint) => paint.id === lid)
     console.log("kártya " + specificcard)
 
+    const longDisc = specificcard?.hosszu_leiras
+ 
+
 return(<>  
         <div className={style.container}>
+            
             <div className={style.productDetailContainer}>
-                <ProductDetailView product={specificcard}/>
+                <ProductDetailView product={specificcard}/>            
             </div>
+                <ProductFeedBack long_disc={longDisc}/>
+           
         </div>
 </>
 )
