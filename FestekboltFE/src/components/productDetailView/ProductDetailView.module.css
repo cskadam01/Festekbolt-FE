@@ -1,0 +1,12 @@
+.oneProductContainer{
+    display: flex;
+    
+    justify-content: center;
+    background-color: tomato;  
+}
+.productPicture{
+  
+}
+.productDetails{
+    padding: 0 120px 0 120px;
+}

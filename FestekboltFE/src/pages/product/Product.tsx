@@ -1,10 +1,14 @@
-
+import { ProductDetail } from "../productDetail/ProductDetail"
+import styles from './Product.module.css'
 export const Product = () =>{
 
 
     return(
         <>
-            <h1>Product</h1>
+            <div className={styles.productDetailContainer}>
+            <ProductDetail/>
+            
+            </div>
         </>
     )
 
