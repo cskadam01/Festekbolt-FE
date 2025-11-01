@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { OrangeButton } from "../../components/orangeButton/OrangeButton";
+import { OrangeButton } from "../orangeButton/OrangeButton";
 import { Link } from 'react-router-dom';
 type ProductCardProps = {
     product_name: string;

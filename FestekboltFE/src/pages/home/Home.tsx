@@ -1,5 +1,5 @@
 import { Footer } from "../../components/footer/Footer"
-import { ProductCard } from "../../components/ProductCard/ProductCard"
+import { ProductCard } from "../../components/productCard/ProductCard"
 import { Slider } from "../../components/slider/Slider"
 import style from "./Home.module.css"
 

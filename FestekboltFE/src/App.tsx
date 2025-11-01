@@ -7,6 +7,8 @@ import {
 import './App.css'
 import { Home } from './pages/home/Home'
 import { Product } from "./pages/product/Product";
+import { ProductDetail } from "./pages/productDetail/ProductDetail";
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/products" element={<Product />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   )
