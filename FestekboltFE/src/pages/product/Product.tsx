@@ -6,7 +6,7 @@ export const Product = () =>{
     return(
         <>
             <div className={styles.productDetailContainer}>
-            <ProductDetail/>
+            
             
             </div>
         </>

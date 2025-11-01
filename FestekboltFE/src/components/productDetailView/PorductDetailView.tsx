@@ -1,20 +1,57 @@
 import styles from './ProductDetailView.module.css'
+import { OrangeButton } from '../orangeButton/OrangeButton';
+import { QuantityIndicators } from '../quantityButtons/quantityButtons';
+import { useState } from 'react';
+
+type Paint = {
+  id: number;
+  termek_nev: string;
+  ar: number;
+  raktaron: boolean;
+  rovid_leiras: string;
+  hosszu_leiras: string;
+  kep_url: string;
+  tipus: string;
+};
+
+type ProductDetailProps = {
+  product?: Paint; // opcionális, mert betöltés alatt még nincs meg
+};
 
 
-export const ProductDetailView = () => {
+export const ProductDetailView = ({product} : ProductDetailProps) => {
+    const [quantity, setQuantity] = useState(1);
 
-    
+
+console.log("hello" + product)
+
 return(<>
     <div className={styles.oneProductContainer}>
         <div className={styles.productPicture}>
-            <img src="https://www.bauhaus.hu/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/f/a/festekbolt_fe_kep_2_14.jpg" alt="Product Image" />
+            <img src={product?.kep_url} alt="Product Image" />
 
 
         </div>
 
 
         <div className={styles.productDetails}>
-            <h2>Product Name</h2>
+            <h2>{product?.termek_nev}</h2>
+            <h3>Ár: {product?.ar} Ft</h3>
+            <div className={styles.ProductButtons}>
+                 <QuantityIndicators  quantity={quantity} setQuantity={setQuantity} />
+                 <OrangeButton button_text='Kosárba'/>
+
+            </div>
+            <div className={styles.isOnStock}>
+            {product?.raktaron ? (
+                <p style={{ color: "green" }}>Raktáron</p>
+                ) : (
+                <p style={{ color: "red" }}>Nincs készleten</p>
+                )}
+            
+            </div>
+            <p>{product?.rovid_leiras}</p>
+
         </div>
 
 

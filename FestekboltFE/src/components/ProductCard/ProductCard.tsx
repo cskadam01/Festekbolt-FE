@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { OrangeButton } from "../orangeButton/OrangeButton";
 import style from "./ProductCrad.module.css"
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
     id:number,
@@ -23,16 +24,18 @@ export const ProductCard = ({ id, product_name, product_image, product_price, pr
 
     return (
         <div className={style.card}>
+            <Link to={`/products/${id}`} style={{color:"#222"}}>
             <img
                 src={product_image}
                 alt={product_name}
                 className={style.image}
             />
-
+            
+            
             <h2 className={style.name}>{product_name}</h2>
             <h4 className={style.price}>
                 {product_price.toLocaleString('hu-HU')} Ft
-            </h4>
+            </h4></Link>
 
             {product_available ? (
                 <h5 className={style.available}>Raktáron</h5>

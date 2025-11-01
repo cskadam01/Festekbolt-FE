@@ -2,11 +2,27 @@
     display: flex;
     
     justify-content: center;
-    background-color: tomato;  
+     
 }
-.productPicture{
+.ProductButtons{
+    display: flex;
+    justify-content: center;
+
+}
+.oneProductContainer h3
+{
+   margin-bottom: 5%;
   
+}
+.oneProductContainer h2{
+    margin-bottom: 10%;
+
 }
 .productDetails{
     padding: 0 120px 0 120px;
+    text-align: center;
+}
+.isOnStock{
+    margin-bottom:10%;
+
 }

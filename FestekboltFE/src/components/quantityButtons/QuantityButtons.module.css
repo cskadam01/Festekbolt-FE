@@ -1,0 +1,20 @@
+.quantityContainer {
+  display: flex; align-items: center; justify-content: center;
+  margin: 8px 0; min-height: 36px; /* egységes magasság */
+}
+
+.counterButton {
+    padding: 4px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+.quantity {
+    margin: 0 15px;
+    font-size: 1.2em;
+    min-width: 20px;
+    text-align: center;
+}

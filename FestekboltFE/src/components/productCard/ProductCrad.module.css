@@ -29,10 +29,11 @@
   align-items: center;
   padding-top: 8px;
   cursor: pointer;
-  background-color:#222;
+  
  
  
 }
+
 
 /* Stabilizáljuk a változó magasságú sorokat */
 .name { 
@@ -90,6 +91,10 @@
     font-size: 1.2em;
     min-width: 20px;
     text-align: center;
+}
+
+.name .price{
+    color: #222;
 }
 
 
