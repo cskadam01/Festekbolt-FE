@@ -15,7 +15,7 @@ type Paint = {
 };
 
 type ProductDetailProps = {
-  product?: Paint; // opcionális, mert betöltés alatt még nincs meg
+  product?: Paint; 
 };
 
 

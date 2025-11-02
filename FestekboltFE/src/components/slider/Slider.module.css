@@ -1,6 +1,7 @@
 .wrapper {
     height: 100%;
     position: relative;
+   
   }
   
   .slide {
@@ -8,6 +9,7 @@
     height: 100%;
     background-position: center;
     background-size: cover;
+    
   }
   
   .arrowLeft,

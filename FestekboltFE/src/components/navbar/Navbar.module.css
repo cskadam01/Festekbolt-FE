@@ -1,0 +1,55 @@
+.largeNav {
+    padding: 2% 10%;
+    background-color: rgb(235, 236, 236);
+    position: relative; /* hogy az abszolút elem (input) ehhez igazodjon */
+    box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
+    margin-bottom: 5%;
+  }
+  
+  .largeNavTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  /* a kereső fixen a középpontban */
+  .search {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(520px, 90%);
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+  }
+  
+  /* ikonok */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: 1.1rem;
+  }
+  
+.largeNavLinks{
+    margin-top: 2%;
+    display: flex;
+    gap: 10px;
+
+}
+.largeNavLinks a{
+    color: #222f;
+    text-decoration: none;
+    font-size: 1.3rem;
+
+}

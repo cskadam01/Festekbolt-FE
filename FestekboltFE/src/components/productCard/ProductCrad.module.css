@@ -3,9 +3,9 @@
   /* height: 320px;  <- EZT VEDD KI */
   min-height: 320px;          /* alap magasság, de nőhet */
   box-sizing: border-box;      /* padding beleszámít */
-  border-radius: 10px;
-  border: 1px solid black;
-  box-shadow: rgba(0,0,0,0.35) 0 5px 15px;
+  
+  border: 1px solid rgb(218, 218, 218);
+  
   padding: 12px;               /* ésszerű padding */
   margin: 10px;
   background: #fff;
@@ -67,7 +67,7 @@
 .image {
   width: 160px; height: 160px;
   display: block; margin: 0 auto;
-  border-radius: 6px; object-fit: cover;
+  object-fit: cover;
 }
 
 .quantityContainer {

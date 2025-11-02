@@ -2,6 +2,7 @@
    width: 40%;
    height: 30vh;
    margin: 0 auto;
+   margin-bottom: 5%;
 }
 
 .productItems{
@@ -9,4 +10,5 @@
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
+   margin-bottom: 5%;
 }

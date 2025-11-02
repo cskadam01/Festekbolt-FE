@@ -4,6 +4,7 @@ import { Slider } from "../../components/slider/Slider"
 import style from "./Home.module.css"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Navbar } from "../../components/navbar/Navbar"
 type Paint = {
   id: number;
   termek_nev: string;
@@ -56,6 +57,7 @@ export const Home = () =>{
     return(
         <>
         <div>
+            <Navbar/>
             <div className={style.sliderHomeContainer}>
             <Slider images={images}/>
             </div>
