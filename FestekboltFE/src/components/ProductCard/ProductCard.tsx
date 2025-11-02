@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { OrangeButton } from "../orangeButton/OrangeButton";
 import style from "./ProductCrad.module.css"
 import { Link } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
+
 
 type ProductCardProps = {
     id:number,
@@ -13,6 +15,7 @@ type ProductCardProps = {
 
 export const ProductCard = ({ id, product_name, product_image, product_price, product_available }: ProductCardProps) => {
     const [quantity, setQuantity] = useState(1);
+    const {addToCart} = useCart();
 
     const handleDecrease = () => {
         if (quantity > 1) setQuantity(quantity - 1);
@@ -63,7 +66,12 @@ export const ProductCard = ({ id, product_name, product_image, product_price, pr
             </div>
 
             <div className={style.buttonContainer}>
-                <OrangeButton button_text="Kosárba" />
+                <OrangeButton button_text="Kosárba" onClick={
+                    ()=> addToCart(
+                        {id, termek_nev:product_name, ar:product_price, raktaron: product_available, rovid_leiras: "", hosszu_leiras:"", kep_url:product_image, tipus:""},
+                        quantity
+                    )
+                } disabled={!product_available}/>
             </div>
         </div>
     );

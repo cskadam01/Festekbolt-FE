@@ -2,6 +2,8 @@ import styles from './ProductDetailView.module.css'
 import { OrangeButton } from '../orangeButton/OrangeButton';
 import { QuantityIndicators } from '../quantityButtons/QuantityButtons';
 import { useState } from 'react';
+import { useCart } from '../../contexts/CartContext';
+
 
 type Paint = {
   id: number;
@@ -21,9 +23,13 @@ type ProductDetailProps = {
 
 export const ProductDetailView = ({product} : ProductDetailProps) => {
     const [quantity, setQuantity] = useState(1);
+    const { addToCart, items } = useCart();
 
 
-console.log("hello" + product)
+
+
+    console.log("KOSÁR JELENLEGI TARTALMA:", items);
+
 
 return(<>
     <div className={styles.oneProductContainer}>
@@ -39,7 +45,11 @@ return(<>
             <h3>Ár: {product?.ar} Ft</h3>
             <div className={styles.ProductButtons}>
                  <QuantityIndicators  quantity={quantity} setQuantity={setQuantity} />
-                 <OrangeButton button_text='Kosárba'/>
+                 <OrangeButton
+                    button_text="Kosárba"
+                    onClick={() => product && addToCart(product, quantity)}
+                    disabled={!product?.raktaron}
+                    />
 
             </div>
             <div className={styles.isOnStock}>
