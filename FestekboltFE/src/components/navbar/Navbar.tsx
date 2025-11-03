@@ -17,7 +17,8 @@ return(
 
             <div className={styles.actions}>
             <FaRegUser />
-            <GrCart />
+            <Link to="/cart"> <GrCart /></Link>
+            
             </div>
         </div>
 

@@ -1,8 +1,9 @@
 import React, {createContext, useContext, useMemo, useReducer} from "react";
 import type { Paint } from "../pages/home/Home";
-import { SiPayloadcms } from "react-icons/si";
 
-interface CartItem{
+
+
+export interface CartItem{
     product:Paint
     qty: number
 }
@@ -10,7 +11,39 @@ interface CartItem{
 interface CartContextValue{
     items: CartItem[]
     addToCart: (product: Paint, qty?: number) => void;
+    itemIncrease: (product: Paint, qty?: number) => void;
+    itemDecrease: (product: Paint, qty?: number) => void;
+    deleteFromCart: (product:Paint) => void
+    
+    
 }
+type CartAction =
+  | {
+      type: "ADD_ITEM";
+      payload: {
+        product: Paint;
+        qty: number;
+      };
+    }
+  | {
+      type: "INCREASE";
+      payload: {
+        product: Paint;
+      };
+    }
+  | {
+      type: "DECREASE";
+      payload: {
+        product: Paint;
+      };
+    }
+    | {
+        type: "DELETE_FROM_CART";
+        payload: {
+          product: Paint;
+        };
+      };
+
 
 
 
@@ -25,7 +58,7 @@ const initialState = {
 
 // Létrehozzuk a reducert
 // a state ben lesz a jelenelgi állapota, az actionben a termék és mennyiség
-function cartReducer(state: typeof initialState, actions: any){
+function cartReducer(state: typeof initialState, actions: CartAction){
 
     //Eldöntjük hogy melyik parancsot akarjuk lefuttatni
     switch (actions.type){
@@ -50,9 +83,52 @@ function cartReducer(state: typeof initialState, actions: any){
             }
 
             //ha nem volt benne alapból, akkor a meglévő listáhozz hozzá adjuk az új elemet 
-            return {items: [...state.items, {product, qty}]}
+            return {items: [...state.items, {product, qty}]}          
+        }
 
-           
+        case "INCREASE": {
+            const { product } = actions.payload;
+          
+            const existingIndex = state.items.findIndex(
+              (item) => item.product.id === product.id
+            );
+          
+            if (existingIndex === -1) {
+              return state;
+            }
+          
+            const updated = [...state.items];
+            updated[existingIndex].qty += 1;   
+            return { items: updated };
+          }
+
+        case "DECREASE": {
+            const{product } = actions.payload
+
+            const existingIndex = state.items.findIndex((items) => items.product.id === product.id)
+
+            if (existingIndex === -1) {
+                return state;
+              }
+              
+              const updated = [...state.items];
+              if (updated[existingIndex].qty > 1) {
+                updated[existingIndex].qty -= 1;
+              }
+              return { items: updated };
+        }
+
+        case "DELETE_FROM_CART":{
+            const{product } = actions.payload
+            const itemToDelete = state.items.findIndex((items) => items.product.id === product.id)
+            
+
+            if (itemToDelete === -1) return state; 
+
+            var updated = [...state.items];
+            updated.splice(itemToDelete, 1)
+            return {items: updated}
+
         }
 
         default:
@@ -78,13 +154,44 @@ export function CartProvider({children}: {children: React.ReactNode}){
                 
             })
 
+        
+
         }
+        function itemIncrease(product:Paint){
+            dispatch({
+                type: "INCREASE",
+                payload: {product}
+
+            })
+        }
+
+        function itemDecrease(product:Paint){
+            dispatch({
+                type:"DECREASE",
+                payload: {product}
+            })
+        
+
+        }
+        function deleteFromCart(product:Paint){
+            dispatch({
+                type:"DELETE_FROM_CART",
+                payload: {product}
+            })
+
+        }
+
         // value lesz a context tartalma amit tovább adnunk a gyerek komponenseknek
         const value: CartContextValue = {
             //Kosár jelenlegi tartalma
             items: state.items,
             //Függvény amivel új elemet lehet hozzáadnu
-            addToCart
+            addToCart,
+            //Függvény amivel növelni tudjuk az elemét
+            itemIncrease,
+            itemDecrease,
+            deleteFromCart
+
         }
 
         return(

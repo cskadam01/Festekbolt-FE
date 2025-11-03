@@ -38,12 +38,7 @@ export const Home = () =>{
                 setError(error.message)
 
             }
-           
-        
-
-
         };
-
 
         GetPaints();
     }, []);

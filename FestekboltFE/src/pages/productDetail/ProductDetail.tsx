@@ -4,6 +4,7 @@ import axios from "axios";
 import style from "./ProductDetail.module.css"
 import { ProductDetailView } from "../../components/productDetailView/PorductDetailView";
 import { ProductFeedBack } from "../../components/porductFeedBack/ProductFeedBack";
+import { Navbar } from "../../components/navbar/Navbar";
 type Paint = {
   id: number;
   termek_nev: string;
@@ -56,7 +57,8 @@ export const ProductDetail = () => {
     const longDisc = specificcard?.hosszu_leiras
  
 
-return(<>  
+return(<>
+        <Navbar/>
         <div className={style.container}>
             
             <div className={style.productDetailContainer}>
