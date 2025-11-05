@@ -1,0 +1,21 @@
+.orangeButton {
+    background-color: #ff9e49ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    
+    font-size: 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .orangeButton:hover {
+    background-color: #ffb36aff;
+  }
+  
+  .orangeButton:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  

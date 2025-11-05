@@ -2,6 +2,14 @@ import styles from "./Footer.module.css"
 import { OrangeButton } from "../orangeButton/OrangeButton"
 
 export const Footer = () => {
+
+    function handleSub(){
+
+        //hírlevlélre való ferilartkozás
+    }
+
+
+
   return(
     <div className={styles.footerContainer}>
         <div className={styles.footerContent}>
@@ -15,7 +23,7 @@ export const Footer = () => {
                 <h2>Hírlevél:</h2>
                 <div className={styles.newsletter}>
                     <input type="text" name="" id="" style={{padding:"10px 20px", outline:"none",border:"none"}}/>
-                    <OrangeButton button_text="Feliratkozás"/>
+                    <OrangeButton button_text="Feliratkozás" onClick={handleSub}/>
                 </div>
             </div>
             <div>
