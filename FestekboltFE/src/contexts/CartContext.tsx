@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useMemo, useReducer} from "react";
+import React, {createContext, useContext, useEffect, useMemo, useReducer} from "react";
 import type { Paint } from "../pages/home/Home";
 
 
@@ -140,12 +140,37 @@ function cartReducer(state: typeof initialState, actions: CartAction){
 
 } 
 
+
+//kezdénél lekérjük a cartot 
+function initCart() {
+    if (typeof window === "undefined") {
+      return initialState;
+    }
+  
+    const stored = localStorage.getItem("cart");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as { items: CartItem[] };
+        return { items: parsed.items || [] };
+      } catch {
+        return initialState;
+      }
+    }
+  
+    return initialState;
+  }
+  
+
 //Komponens lesz, ez fogja kürülvenni az egész appot hogy bárhonnan eltudjuk érni a kosarat
 export function CartProvider({children}: {children: React.ReactNode}){
 
         //hozzá adjuk a logikát a useReducerhez, a state lesz a kosár tartalma, a dispcathecl fogjuk tudni meghívni a parancsokat
         //cartReducer lesz amit fent megírtunk logika, az initialState pedig a kezdő kosár
-        const[state, dispatch] = useReducer(cartReducer, initialState)
+        const[state, dispatch] = useReducer(cartReducer, initialState, initCart)
+
+        useEffect(() => {
+            localStorage.setItem("cart", JSON.stringify(state));
+          }, [state]);
 
         function addToCart(product: Paint, qty:number = 1){
             dispatch({

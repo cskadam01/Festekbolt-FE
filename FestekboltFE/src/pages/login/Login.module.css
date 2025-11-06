@@ -1,10 +1,10 @@
 .container{
-    
+        margin-top: -5%;
     
 }
 
 .formCont{
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     padding: 10% 33%;
 }
 .formCont h1{
@@ -15,21 +15,30 @@
 
 .formCont p{
     font-size: 1.3rem;
+    margin-bottom: 5px;
 }
-.formCont input{
-    width: 100%;
-    padding: 10px;
-}
+
 
 .loginLinks{
     text-align: center;
-    font-size: small;
+    font-size: 1rem;
     display: block;
+    margin-top: 10px;
+    color: #222f;
+    
 }
 
+.formCont input,
+.formCont button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
 .logbutton{
-    text-align: center;
-    
-   
+    margin-top: 15px;
+}
 
+.formCont input{
+    margin-bottom: 20px;
 }
