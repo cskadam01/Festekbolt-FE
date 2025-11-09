@@ -10,6 +10,7 @@ export interface CartItem{
 
 interface CartContextValue{
     items: CartItem[]
+    total: number
     addToCart: (product: Paint, qty?: number) => void;
     itemIncrease: (product: Paint, qty?: number) => void;
     itemDecrease: (product: Paint, qty?: number) => void;
@@ -42,6 +43,9 @@ type CartAction =
         payload: {
           product: Paint;
         };
+      }
+      | {
+        type: "CALC_TOTAL";
       };
 
 
@@ -52,7 +56,8 @@ const CartContext = createContext<CartContextValue | null>(null)
 
 //létrehozzuk a kosár tartalmát amiben a Paint és a mennyiség lesz
 const initialState = {
-    items: [] as CartItem[]
+    items: [] as CartItem[],
+    total: 0 
 }
 
 
@@ -79,11 +84,11 @@ function cartReducer(state: typeof initialState, actions: CartAction){
                 //növeljük a bizonyos termék értékét
                 updated[existingIndex].qty += qty 
                 //visszaadjuk a frissített listát
-                return {items : updated}
+                return { ...state, items: updated };
             }
 
             //ha nem volt benne alapból, akkor a meglévő listáhozz hozzá adjuk az új elemet 
-            return {items: [...state.items, {product, qty}]}          
+            return { ...state, items: [...state.items, { product, qty }] };        
         }
 
         case "INCREASE": {
@@ -99,7 +104,7 @@ function cartReducer(state: typeof initialState, actions: CartAction){
           
             const updated = [...state.items];
             updated[existingIndex].qty += 1;   
-            return { items: updated };
+            return { ...state, items: updated };
           }
 
         case "DECREASE": {
@@ -115,7 +120,7 @@ function cartReducer(state: typeof initialState, actions: CartAction){
               if (updated[existingIndex].qty > 1) {
                 updated[existingIndex].qty -= 1;
               }
-              return { items: updated };
+              return { ...state, items: updated };
         }
 
         case "DELETE_FROM_CART":{
@@ -127,7 +132,20 @@ function cartReducer(state: typeof initialState, actions: CartAction){
 
             var updated = [...state.items];
             updated.splice(itemToDelete, 1)
-            return {items: updated}
+            return { ...state, items: updated };
+
+        }
+
+        case "CALC_TOTAL":{
+            var total = 0
+            state.items.forEach((item)=>{
+                const onePrice = item.product.ar * item.qty
+                total = total + onePrice
+            }
+            
+            
+            )
+            return { ...state, total };
 
         }
 
@@ -150,8 +168,11 @@ function initCart() {
     const stored = localStorage.getItem("cart");
     if (stored) {
       try {
-        const parsed = JSON.parse(stored) as { items: CartItem[] };
-        return { items: parsed.items || [] };
+        const parsed = JSON.parse(stored) as { items: CartItem[]; total?: number };
+        return {
+            items: parsed.items || [],
+            total: parsed.total ?? 0
+          };
       } catch {
         return initialState;
       }
@@ -166,8 +187,16 @@ export function CartProvider({children}: {children: React.ReactNode}){
 
         //hozzá adjuk a logikát a useReducerhez, a state lesz a kosár tartalma, a dispcathecl fogjuk tudni meghívni a parancsokat
         //cartReducer lesz amit fent megírtunk logika, az initialState pedig a kezdő kosár
-        const[state, dispatch] = useReducer(cartReducer, initialState, initCart)
 
+
+        //ha változik a kosár eleme akkor számolja újra a kosár összegét
+        const[state, dispatch] = useReducer(cartReducer, initialState, initCart)
+        useEffect(() => {
+            dispatch({ type: "CALC_TOTAL" });
+          }, [state.items]);
+
+
+        //Ha változik a kosár akkor mindig mentsük el a jelenlegit a localstorageba
         useEffect(() => {
             localStorage.setItem("cart", JSON.stringify(state));
           }, [state]);
@@ -210,6 +239,7 @@ export function CartProvider({children}: {children: React.ReactNode}){
         const value: CartContextValue = {
             //Kosár jelenlegi tartalma
             items: state.items,
+            total: state.total,
             //Függvény amivel új elemet lehet hozzáadnu
             addToCart,
             //Függvény amivel növelni tudjuk az elemét

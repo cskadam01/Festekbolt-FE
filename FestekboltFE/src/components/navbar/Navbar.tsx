@@ -16,8 +16,18 @@ return(
             <FaSearch />
 
             <div className={styles.actions}>
-            <FaRegUser />
-            <Link to="/cart"> <GrCart /></Link>
+
+            
+            <Link to="/login" className={styles.navLink}>
+                <FaRegUser />
+                Bejelentkezés
+                </Link>
+
+                <Link to="/cart" className={styles.navLink}>
+                <GrCart />
+                Kosár
+            </Link>
+
             
             </div>
         </div>

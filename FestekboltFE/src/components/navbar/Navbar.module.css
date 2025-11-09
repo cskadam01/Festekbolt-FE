@@ -53,3 +53,16 @@
     font-size: 1.3rem;
 
 }
+
+.navLink {
+  display: inline-flex;           /* ikon + szöveg egységben marad */
+  align-items: center;            /* középre igazítja őket függőlegesen */
+  gap: 6px;                       /* kis távolság az ikon és a szöveg között */
+  text-decoration: none;          /* eltünteti az aláhúzást */
+  color: inherit;                 /* örökli a szülő színét */
+  font-size: 1.3rem;                /* opcionális, egységes méret */
+}
+
+.navLink:hover {
+  text-decoration: underline;     /* ha akarod, hoverre visszateheted */
+}
