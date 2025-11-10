@@ -1,10 +1,11 @@
 import { Footer } from "../../components/footer/Footer"
-import { ProductCard } from "../../components/productCard/ProductCard"
+import { ProductCard } from "../../components/ProductCard/ProductCard"
 import { Slider } from "../../components/slider/Slider"
 import style from "./Home.module.css"
-import { useEffect, useState } from "react"
-import axios from "axios"
+
+
 import { Navbar } from "../../components/navbar/Navbar"
+import { usePaints } from "../../contexts/GetBookContext"
 export type Paint = {
   id: number;
   termek_nev: string;
@@ -17,33 +18,11 @@ export type Paint = {
 };
 
 export const Home = () =>{
-    const [paint, setPaint] = useState<Paint[]>([]);
-    const [error, setError] = useState<string>("");
 
-    useEffect(() => {
-        const GetPaints = async() => {
-            try{
-            const url = "https://raw.githubusercontent.com/cskadam01/festek-api/refs/heads/main/festek.json";
-            const response = await axios.get(url, {
-            transformResponse: [(data) => JSON.parse(data)]
-            });
-            setPaint(response.data);
+    const{paints} = usePaints()
 
-            if (response.status === 200){ 
-                
-            setPaint(response.data);
-            console.log(response.data);
-        }}
-            catch(error : any){
-                setError(error.message)
 
-            }
-        };
-
-        GetPaints();
-    }, []);
-
-    const images = paint.map((paintItem) => paintItem.kep_url)
+    const images = paints.map((paint) => paint.kep_url)
   
 
 
@@ -57,17 +36,17 @@ export const Home = () =>{
             <Slider images={images}/>
             </div>
             
-            {paint.length > 0 ? (
+            {paints.length > 0 ? (
             <div className={style.productItems}>
-            {paint.map((paintItem) => (
+            {paints.map((paint) => (
             <ProductCard
                 
-                key={paintItem.id}
-                id={paintItem.id}
-                product_name={paintItem.termek_nev}
-                product_image={paintItem.kep_url}
-                product_price={paintItem.ar}
-                product_available={paintItem.raktaron}
+                key={paint.id}
+                id={paint.id}
+                product_name={paint.termek_nev}
+                product_image={paint.kep_url}
+                product_price={paint.ar}
+                product_available={paint.raktaron}
                 
             />))}</div>) : 
             (<p>Loading</p>)}

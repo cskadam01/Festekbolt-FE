@@ -5,6 +5,7 @@ import style from "./ProductDetail.module.css"
 import { ProductDetailView } from "../../components/productDetailView/PorductDetailView";
 import { ProductFeedBack } from "../../components/porductFeedBack/ProductFeedBack";
 import { Navbar } from "../../components/navbar/Navbar";
+import { usePaints } from "../../contexts/GetBookContext";
 type Paint = {
   id: number;
   termek_nev: string;
@@ -20,38 +21,11 @@ type Paint = {
 export const ProductDetail = () => {
     const {takenId} = useParams()
     const lid = Number(takenId)
-    const [paint, setPaint] = useState<Paint[]>([]);
-    const [error, setError] = useState<string>("");
-
-    useEffect(() => {
-        const GetPaints = async() => {
-            try{
-            const url = "https://raw.githubusercontent.com/cskadam01/festek-api/refs/heads/main/festek.json";
-            const response = await axios.get(url, {
-            transformResponse: [(data) => JSON.parse(data)]
-            });
-            setPaint(response.data);
-
-            if (response.status === 200){ 
-                
-            setPaint(response.data);
-            
-        }}
-            catch(error : any){
-                setError(error.message)
-
-            }
-           
-        
+    const {paints} = usePaints()
 
 
-        };
-
-
-        GetPaints();
-    }, []);
     console.log(takenId)
-    const specificcard = paint.find((paint) => paint.id === lid)
+    const specificcard = paints.find((paint) => paint.id === lid)
     console.log("kártya " + specificcard)
 
     const longDisc = specificcard?.hosszu_leiras
