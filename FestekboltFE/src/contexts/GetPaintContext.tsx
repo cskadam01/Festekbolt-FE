@@ -1,5 +1,5 @@
 
-import { createContext, useReducer, useEffect, useContext, useState } from "react";
+import { createContext, useReducer, useEffect, useContext, useState, useMemo } from "react";
 import type { Paint } from "../pages/home/Home";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ interface PaintsContextValue {
   isLoading : boolean;
   error : string | null;
   setPaints: (paints: Paint[]) => void;
+  maxPrice : number | null
 }
 
 // kezdeti állapot, üres festéklista
@@ -80,12 +81,16 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_PAINTS", payload: paints });
   }
 
+  const prices = useMemo(() => state.paints.map((item) => item.ar), [state.paints])
+  const maxPrice = useMemo(()=> (prices.length ? Math.max(...prices) : null), [prices])
+
   // a context által megosztott értékek (az állapot és a setter függvény)
   const value: PaintsContextValue = {
     paints: state.paints,
     isLoading,
     error,
     setPaints,
+    maxPrice
   };
 
   // visszaadjuk a providert, hogy a gyerek komponensek hozzáférjenek a festékekhez
