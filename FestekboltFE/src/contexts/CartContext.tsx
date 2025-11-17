@@ -103,8 +103,10 @@ function cartReducer(state: typeof initialState, actions: CartAction){
             }
           
             const updated = [...state.items];
-            updated[existingIndex].qty += 1;   
+            updated[existingIndex].qty += 1;
+            console.log("Lefutottam")   
             return { ...state, items: updated };
+            
           }
 
         case "DECREASE": {

@@ -47,6 +47,8 @@ function paintsReducer(state: PaintsState, actions: PaintsAction): PaintsState {
 export function PaintsProvider({ children }: { children: React.ReactNode }) {
   // létrehozzuk az állapotot és a dispatch-et a reducer segítségével
   const [state, dispatch] = useReducer(paintsReducer, initialState);
+
+
   const [isLoading, setIsLoading ] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -88,6 +90,7 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
 
   // visszaadjuk a providert, hogy a gyerek komponensek hozzáférjenek a festékekhez
   return (
+    
     <PaintsContext.Provider value={value}>
       {children}
     </PaintsContext.Provider>
