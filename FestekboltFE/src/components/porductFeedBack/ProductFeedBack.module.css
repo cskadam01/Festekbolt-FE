@@ -1,0 +1,76 @@
+.tabsContainer {
+  width: 100%;
+  font-family: sans-serif;
+  background-color: #f9f9f9; /* Az egész doboz háttere */
+  border-radius: 4px;
+}
+
+/* A gombok sávja */
+.tabHeader {
+  display: flex;
+  border-bottom: 1px solid #ddd; /* Választóvonal a gombok és a tartalom között */
+  background-color: #f4f4f4; /* A fülek sávjának alapszíne */
+}
+
+.tabButton {
+  padding: 15px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+  border-right: 1px solid #ddd; /* Választóvonal a gombok között */
+  transition: all 0.2s ease;
+  position: relative;
+  top: 1px; /* Hogy rálógjon az alsó vonalra */
+}
+
+.tabButton:hover {
+  color: #000;
+  background-color: #eaeaea;
+}
+
+/* Az aktív gomb stílusa */
+.tabButton.active {
+  background-color: #fff; /* Fehér, mint a tartalom */
+  color: #222;
+  border-bottom: 1px solid #fff; /* Ezzel "takarjuk ki" az elválasztó vonalat */
+  border-top: 2px solid #333; /* Opcionális: kis kiemelés a tetején, ha szeretnéd */
+}
+
+/* A tartalom doboz */
+.tabContent {
+  padding: 30px;
+  background-color: #fff;
+  min-height: 200px;
+}
+
+/* Címek és szövegek formázása */
+.tabContent h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.tabContent h4 {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tabContent p {
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Kis animáció a váltáshoz (sztem ez fasza, ezt hagyjuk meg) */
+.contentFadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

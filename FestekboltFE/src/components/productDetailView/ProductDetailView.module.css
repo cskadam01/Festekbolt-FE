@@ -1,8 +1,8 @@
 .oneProductContainer{
     display: flex;
-    
     justify-content: center;
-     
+    align-items: center;
+    gap: 5%;
 }
 .ProductButtons{
     display: flex;
@@ -15,14 +15,25 @@
   
 }
 .oneProductContainer h2{
-    margin-bottom: 10%;
-
+    margin-bottom: 5%;
 }
+
+.oneProductContainer p{
+    margin-bottom: 5%;
+}
+
 .productDetails{
     padding: 0 120px 0 120px;
-    text-align: center;
 }
-.isOnStock{
-    margin-bottom:10%;
 
+.productDetails h2{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.productPicture{
+    object-fit: cover;
+    border: 1px solid rgb(218, 218, 218);
+    padding: 10px;
 }

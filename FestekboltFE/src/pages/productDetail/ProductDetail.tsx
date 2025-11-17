@@ -5,6 +5,7 @@ import style from "./ProductDetail.module.css"
 import { ProductDetailView } from "../../components/productDetailView/PorductDetailView";
 import { ProductFeedBack } from "../../components/porductFeedBack/ProductFeedBack";
 import { Navbar } from "../../components/navbar/Navbar";
+import { Footer } from "../../components/footer/Footer";
 type Paint = {
   id: number;
   termek_nev: string;
@@ -46,8 +47,6 @@ export const ProductDetail = () => {
 
 
         };
-
-
         GetPaints();
     }, []);
     console.log(takenId)
@@ -59,14 +58,18 @@ export const ProductDetail = () => {
 
 return(<>
         <Navbar/>
+
         <div className={style.container}>
             
             <div className={style.productDetailContainer}>
                 <ProductDetailView product={specificcard}/>            
             </div>
+            <div className={style.description}>
                 <ProductFeedBack long_disc={longDisc}/>
-           
+            </div>
         </div>
+
+        <Footer/>
 </>
 )
 }

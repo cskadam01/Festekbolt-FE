@@ -5,10 +5,22 @@
    margin-bottom: 5%;
 }
 
-.productItems{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-wrap: wrap;
-   margin-bottom: 5%;
+.productListContainer{
+   box-sizing: border-box;
+   width: 100%;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+   gap: 20px;
+}
+
+.productHome{
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 20px;
+   margin-top: 10%;
+   align-items: stretch;
+   box-sizing: border-box;
+   margin-left: 5%;
+   margin-right: 5%;
+   margin-bottom: 10%;
 }
