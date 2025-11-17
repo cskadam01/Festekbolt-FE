@@ -1,23 +1,19 @@
-import { useEffect } from "react";
-import { ProductDetailView } from "../../components/productDetailView/PorductDetailView"
+import { Navbar } from "../../components/navbar/Navbar"
+import { Footer } from "../../components/footer/Footer";
+import { FiltersAndProducts } from "../../components/filtersAndProducts/FiltersAndProducts";
 
-import styles from './Product.module.css'
+
+
 export const Product = () =>{
-
-    
-
 
     return(
         <>
-            <div className={styles.productDetailContainer}>
-                <div className={styles.content}>
-                    <h1> Termékek</h1>
+            <Navbar/>
+            
+            <FiltersAndProducts />
 
-                    <ProductDetailView/>
+            <Footer/>
 
-
-                </div>
-            </div>
         </>
     )
 

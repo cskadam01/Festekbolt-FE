@@ -35,22 +35,22 @@ return(<>
     <div className={styles.oneProductContainer}>
         <div className={styles.productPicture}>
             <img src={product?.kep_url} alt="Product Image" />
-
-
         </div>
 
 
         <div className={styles.productDetails}>
             <h2>{product?.termek_nev}</h2>
+            <p>{product?.rovid_leiras}</p>
             <h3>Ár: {product?.ar} Ft</h3>
             <div className={styles.ProductButtons}>
                  <QuantityIndicators  quantity={quantity} setQuantity={setQuantity} />
-                 <OrangeButton
+            </div>
+            <div>
+                <OrangeButton
                     button_text="Kosárba"
                     onClick={() => product && addToCart(product, quantity)}
                     disabled={!product?.raktaron}
                     />
-
             </div>
             <div className={styles.isOnStock}>
             {product?.raktaron ? (
@@ -60,7 +60,6 @@ return(<>
                 )}
             
             </div>
-            <p>{product?.rovid_leiras}</p>
 
         </div>
 
