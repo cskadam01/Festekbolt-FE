@@ -10,10 +10,6 @@ import style from "./Cart.module.css"
 export const Cart = () => {
 
     const{items, total} = useCart()
-
-
-    console.log("Jelenlegi tartalom kosár oldalon", items)
-
    
   return(
     
@@ -34,15 +30,6 @@ export const Cart = () => {
 ) : (
   <h1 className={style.emptyCart}>A kosarad jelenleg üres</h1>
 )}
-
-       
-       <p>{total}</p>
-       
-
-       
-        
-
     </>
-
   )
 }
