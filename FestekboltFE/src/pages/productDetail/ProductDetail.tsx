@@ -5,7 +5,7 @@ import style from "./ProductDetail.module.css"
 import { ProductDetailView } from "../../components/productDetailView/PorductDetailView";
 import { ProductFeedBack } from "../../components/porductFeedBack/ProductFeedBack";
 import { Navbar } from "../../components/navbar/Navbar";
-import { usePaints } from "../../contexts/GetBookContext";
+import { usePaints } from "../../contexts/GetPaintContext";
 type Paint = {
   id: number;
   termek_nev: string;

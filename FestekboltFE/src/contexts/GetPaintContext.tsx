@@ -1,5 +1,5 @@
 
-import { createContext, useReducer, useEffect, useContext } from "react";
+import { createContext, useReducer, useEffect, useContext, useState } from "react";
 import type { Paint } from "../pages/home/Home";
 import axios from "axios";
 
@@ -11,6 +11,8 @@ interface PaintsState {
 // definiáljuk mit fog tartalmazni a context, vagyis mi lesz elérhető bárhonnan
 interface PaintsContextValue {
   paints: Paint[];
+  isLoading : boolean;
+  error : string | null;
   setPaints: (paints: Paint[]) => void;
 }
 
@@ -45,17 +47,26 @@ function paintsReducer(state: PaintsState, actions: PaintsAction): PaintsState {
 export function PaintsProvider({ children }: { children: React.ReactNode }) {
   // létrehozzuk az állapotot és a dispatch-et a reducer segítségével
   const [state, dispatch] = useReducer(paintsReducer, initialState);
+  const [isLoading, setIsLoading ] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   // az api lekérés itt történik, csak egyszer fut le amikor a provider betölt
   useEffect(() => {
     const paintCall = async () => {
+      setIsLoading(true)
+      setError(null)
       try {
         const response = await axios.get(
           "https://raw.githubusercontent.com/cskadam01/festek-api/refs/heads/main/festek.json"
         );
         setPaints(response.data);
-      } catch (error) {
-        console.error("Hiba a festékek lekérésekor:", error);
+      } catch (e:any) {
+        setError(e?.message ?? "Ismeretlen hiba")
+
+      }
+      finally{
+        setIsLoading(false)
+
       }
     };
 
@@ -70,6 +81,8 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
   // a context által megosztott értékek (az állapot és a setter függvény)
   const value: PaintsContextValue = {
     paints: state.paints,
+    isLoading,
+    error,
     setPaints,
   };
 

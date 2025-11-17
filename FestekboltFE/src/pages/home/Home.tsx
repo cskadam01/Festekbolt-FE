@@ -5,7 +5,7 @@ import style from "./Home.module.css"
 
 
 import { Navbar } from "../../components/navbar/Navbar"
-import { usePaints } from "../../contexts/GetBookContext"
+import { usePaints } from "../../contexts/GetPaintContext"
 export type Paint = {
   id: number;
   termek_nev: string;
