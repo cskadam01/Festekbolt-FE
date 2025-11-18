@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer, useMemo } from "react"
+import type { Paint } from "../pages/home/Home";
 import { usePaints } from "./GetPaintContext";
 
 type Filters = {
@@ -27,6 +28,9 @@ export type FiltersContextValue = {
     setIsDragging: (isDragging: boolean) => void;
     commitName: () => void;
     reset: () => void;
+
+    filteredPaints: Paint[];
+    showClearButton: boolean;
   };
 
 const initialFilters: Filters = {
@@ -92,6 +96,8 @@ function reducer(state: Filters, action:FilterActions){
 
 export const FiltersProvider = ({children, maxPrice, minPrice} : {children:React.ReactNode, maxPrice: number| null, minPrice: number | null}) =>{
     
+    const { paints, setVisiblePaints } = usePaints();
+
     const [filters, dispatch] = useReducer(reducer, initialFilters,(initial)=>{
         const saved = localStorage.getItem("filterState")
         const base: Filters = saved ? JSON.parse(saved) : initial;
@@ -121,6 +127,36 @@ export const FiltersProvider = ({children, maxPrice, minPrice} : {children:React
                 dispatch({ type: "setMax", max: maxPrice });
             }
     }, [minPrice, maxPrice]);
+
+    const filteredPaints = useMemo(() => {
+    return paints.filter((p) => {
+        const price = Number(p.ar);
+        if (filters.min == null || filters.max == null) return true;
+
+        const passesPrice = price >= filters.min && price <= filters.max;
+        const passesType = filters.byType.size === 0 || filters.byType.has(p.tipus);
+        const passesAvailability =
+            filters.byAvailability.size === 0 || filters.byAvailability.has(p.raktaron);
+        const passesName =
+            filters.byName === "" ||
+            p.termek_nev.toLowerCase().includes(filters.byName.toLowerCase());
+
+        return passesPrice && passesType && passesAvailability && passesName;
+        });
+    }, [paints, filters]);
+
+    const showClearButton = useMemo(() => {
+        const isMinPriceActive = filters.min !== null && filters.min > (minPrice ?? 0);
+        const isMaxPriceActive = filters.max !== null && filters.max < (maxPrice ?? Infinity);
+        const isTypeActive = filters.byType.size > 0;
+        const isAvailabilityActive = filters.byAvailability.size > 0;
+        const isNameActive = filters.byName !== "";
+        return isMinPriceActive || isMaxPriceActive || isTypeActive || isAvailabilityActive || isNameActive;
+    }, [filters, minPrice, maxPrice]);
+
+    useEffect(() => {
+        setVisiblePaints(filteredPaints);
+    }, [filters.isDragging, paints, filters.byType, filters.byAvailability, filters.byName]);
 
     const setMin = (min: number | null) => {
         dispatch({type: "setMin", min})
@@ -153,6 +189,8 @@ export const FiltersProvider = ({children, maxPrice, minPrice} : {children:React
 
     const value = {
         filters,
+        filteredPaints,
+        showClearButton,
         setMin,
         setMax,
         setTypes,
