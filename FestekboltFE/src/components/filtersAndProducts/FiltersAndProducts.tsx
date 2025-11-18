@@ -4,7 +4,7 @@ import styles from "./FiltersAndProducts.module.css"
 import axios from "axios";
 import { ProductCard } from "../productCard/ProductCard";
 import { FaTrash } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
+
 
 /* Nem tudtam szétszedni a kettőt külön, mert a kettő függ egymástól.
 Ha nem tetszik legyszi csináld meg de sztem nem éri meg xd */
@@ -13,10 +13,10 @@ export const FiltersAndProducts = () => {
     const [paint, setPaint] = useState<Paint[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [minPrice, setMinPrice] = useState<number | null>(null);
-    const [maxPrice, setMaxPrice] = useState<number | null>(null);
-    const [selectedMinPrice, setSelectedMinPrice] = useState<number | null>(null);
-    const [selectedMaxPrice, setSelectedMaxPrice] = useState<number | null>(null);
+    const [minPrice, setMinPrice] = useState<number>(0);
+    const [maxPrice, setMaxPrice] = useState<number >(0);
+    const [selectedMinPrice, setSelectedMinPrice] = useState<number >(0);
+    const [selectedMaxPrice, setSelectedMaxPrice] = useState<number >(0);
     const [minInput, setMinInput] = useState<string>("");
     const [maxInput, setMaxInput] = useState<string>("");
     const [isDragging, setIsDragging] = useState(false);
