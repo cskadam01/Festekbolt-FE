@@ -8,9 +8,9 @@ import { FiltersProvider } from './contexts/FilterContext.tsx'
 import { usePaints } from './contexts/GetPaintContext.tsx'
 
 function WithFilters() {
-  const { maxPrice } = usePaints();         // itt jutunk hozzá a számolt maxhoz
+  const { maxPrice, minPrice } = usePaints();         // itt jutunk hozzá a számolt maxhoz
   return (
-    <FiltersProvider maxPrice={maxPrice}>   {/* átadjuk propként */}
+    <FiltersProvider maxPrice={maxPrice} minPrice={minPrice}>   {/* átadjuk propként */}
       <App />
     </FiltersProvider>
   );

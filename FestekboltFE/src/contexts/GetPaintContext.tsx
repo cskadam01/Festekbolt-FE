@@ -6,6 +6,7 @@ import axios from "axios";
 // definiáljuk az állapot típusát, ami a festékek listáját tartalmazza
 interface PaintsState {
   paints: Paint[];
+  visiblePaints: Paint[];
 }
 
 // definiáljuk mit fog tartalmazni a context, vagyis mi lesz elérhető bárhonnan
@@ -14,22 +15,25 @@ interface PaintsContextValue {
   isLoading : boolean;
   error : string | null;
   setPaints: (paints: Paint[]) => void;
-  maxPrice : number | null
+  maxPrice : number | null;
+  minPrice : number | null;
+  visiblePaints : Paint[];
+  setVisiblePaints: (visiblePaints: Paint[]) => void;
 }
 
 // kezdeti állapot, üres festéklista
 const initialState: PaintsState = {
   paints: [],
+  visiblePaints: [],
 };
 
 // létrehozzuk a contextet, ami majd megosztja az adatokat a komponensek között
 const PaintsContext = createContext<PaintsContextValue | null>(null);
 
 // reducer action típusa, egyelőre csak a festéklista beállítására szolgál
-type PaintsAction = {
-  type: "SET_PAINTS";
-  payload: Paint[];
-};
+type PaintsAction = 
+  | {type: "SET_PAINTS"; payload: Paint[]}
+  | {type: "SET_VISIBLE_PAINTS"; payload: Paint[]};
 
 // reducer függvény, ami a dispatch hívások alapján módosítja az állapotot
 function paintsReducer(state: PaintsState, actions: PaintsAction): PaintsState {
@@ -38,6 +42,11 @@ function paintsReducer(state: PaintsState, actions: PaintsAction): PaintsState {
       return {
         ...state,
         paints: actions.payload,
+      };
+    case "SET_VISIBLE_PAINTS":
+      return {
+        ...state,
+        visiblePaints: actions.payload,
       };
     default:
       return state;
@@ -48,8 +57,6 @@ function paintsReducer(state: PaintsState, actions: PaintsAction): PaintsState {
 export function PaintsProvider({ children }: { children: React.ReactNode }) {
   // létrehozzuk az állapotot és a dispatch-et a reducer segítségével
   const [state, dispatch] = useReducer(paintsReducer, initialState);
-
-
   const [isLoading, setIsLoading ] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -63,6 +70,7 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
           "https://raw.githubusercontent.com/cskadam01/festek-api/refs/heads/main/festek.json"
         );
         setPaints(response.data);
+        setVisiblePaints(response.data);
       } catch (e:any) {
         setError(e?.message ?? "Ismeretlen hiba")
 
@@ -81,8 +89,13 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_PAINTS", payload: paints });
   }
 
+  function setVisiblePaints(paints: Paint[]) {
+    dispatch({ type: "SET_VISIBLE_PAINTS", payload: paints });
+  }
+
   const prices = useMemo(() => state.paints.map((item) => item.ar), [state.paints])
   const maxPrice = useMemo(()=> (prices.length ? Math.max(...prices) : null), [prices])
+  const minPrice = useMemo(()=> (prices.length ? Math.min(...prices) : null), [prices])
 
   // a context által megosztott értékek (az állapot és a setter függvény)
   const value: PaintsContextValue = {
@@ -90,7 +103,10 @@ export function PaintsProvider({ children }: { children: React.ReactNode }) {
     isLoading,
     error,
     setPaints,
-    maxPrice
+    maxPrice,
+    minPrice,
+    visiblePaints: state.visiblePaints,
+    setVisiblePaints,
   };
 
   // visszaadjuk a providert, hogy a gyerek komponensek hozzáférjenek a festékekhez
