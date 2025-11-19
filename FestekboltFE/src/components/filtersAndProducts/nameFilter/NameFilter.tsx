@@ -1,8 +1,19 @@
 import styles from "./NameFilter.module.css";
 import { useFilter } from "../../../contexts/FilterContext";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const NameFilter = () => {
     const { filters, setNameInput, commitName } = useFilter();
+    const { state } = useLocation();
+    const searchTerm = state?.searchTerm;
+
+    useEffect(() => {
+        if (searchTerm) {
+            setNameInput(searchTerm);
+            commitName();
+        }
+    }, [searchTerm]);
 
     return (
         <div className={styles.filtersDivided}>

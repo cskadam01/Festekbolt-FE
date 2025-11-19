@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import styles from "./Navbar.module.css"
 import { GrCart } from "react-icons/gr";
-import { FaRegUser, FaSearch } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
+import { SearchBar } from "../searchBar/SearchBar";
 export const Navbar = () => {
 return(
     <>
@@ -12,8 +13,7 @@ return(
             <h1>Bolt</h1>
             </div>
 
-            <input type="text" placeholder="Keresés..." className={styles.search} />
-            <FaSearch />
+            <SearchBar />
 
             <div className={styles.actions}>
 
