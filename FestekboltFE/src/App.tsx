@@ -10,12 +10,11 @@ import { Product } from "./pages/product/Product";
 import { ProductDetail } from "./pages/productDetail/ProductDetail";
 import { Cart } from "./pages/cart/Cart";
 import { Login } from "./pages/login/Login";
-
-
+import { Faq } from "./pages/faq/Faq";
+import { About } from "./pages/about/About";
+import { Connect } from "./pages/connect/Connect";
 
 function App() {
-
-
   return (
     <Router>
       <Routes>
@@ -24,6 +23,9 @@ function App() {
         <Route path="/products/:takenId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/connect" element={<Connect />} />
       </Routes>
     </Router>
   )

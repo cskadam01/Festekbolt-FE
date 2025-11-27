@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useEffect, useMemo, useReducer} from "react";
 import type { Paint } from "../pages/home/Home";
+import { useNotification } from "./NotificationContext";
 
 
 
@@ -197,6 +198,8 @@ export function CartProvider({children}: {children: React.ReactNode}){
             dispatch({ type: "CALC_TOTAL" });
           }, [state.items]);
 
+        const { showNotification } = useNotification();
+
 
         //Ha változik a kosár akkor mindig mentsük el a jelenlegit a localstorageba
         useEffect(() => {
@@ -209,6 +212,7 @@ export function CartProvider({children}: {children: React.ReactNode}){
                 payload: {product, qty}
                 
             })
+            showNotification("Termék sikeresen hozzáadva a Kosárhoz");
 
         
 

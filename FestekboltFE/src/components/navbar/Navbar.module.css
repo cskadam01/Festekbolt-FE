@@ -1,69 +1,186 @@
 .largeNav {
-    padding: 2% 10%;
-    background-color: rgb(235, 236, 236);
-    position: relative; /* hogy az abszolút elem (input) ehhez igazodjon */
-    box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.75);
-    margin-bottom: 5%;
-    
-  }
-  
-  .largeNavTop {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    position: relative;
-  }
-  
-  .brand {
-    display: flex;
     align-items: center;
-    
-  }
-  
-  /* a kereső fixen a középpontban */
-  .search {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(520px, 90%);
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: white;
-  }
-  
-  /* ikonok */
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    font-size: 1.1rem;
-  }
-  
-.largeNavLinks{
-    margin-top: 2%;
-    display: flex;
-    gap: 10px;
-
+    padding: 1rem 5%;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-.largeNavLinks a{
-    color: #222f;
-    text-decoration: none;
-    font-size: 1.3rem;
 
+.navLeft, .navCenter, .navRight {
+    display: flex;
+    align-items: center;
+}
+
+.navLeft {
+    flex: 1;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.navCenter {
+    flex: 2;
+    justify-content: center;
+}
+
+.navRight {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: inherit;
+}
+
+.largeNavLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+.largeNavLinks a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px; /* Space for the underline */
+}
+
+.largeNavLinks a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff7a00; /* Accent color for the underline */
+    transition: width 0.3s ease-out;
+}
+
+.largeNavLinks a:hover {
+    color: #000;
+}
+
+.largeNavLinks a:hover::after {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    gap: 1.5rem;
 }
 
 .navLink {
-  display: inline-flex;           /* ikon + szöveg egységben marad */
-  align-items: center;            /* középre igazítja őket függőlegesen */
-  gap: 6px;                       /* kis távolság az ikon és a szöveg között */
-  text-decoration: none;          /* eltünteti az aláhúzást */
-  color: inherit;                 /* örökli a szülő színét */
-  font-size: 1.3rem;                /* opcionális, egységes méret */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    transition: color 0.3s, top 0.3s;
+    position: relative;
+    top: 0;
 }
 
 .navLink:hover {
-  text-decoration: underline;     /* ha akarod, hoverre visszateheted */
+    color: #000;
+    top: -2px;
+}
+
+.menuToggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    justify-self: end;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .largeNav {
+        display: flex;
+        justify-content: space-between;
+    }
+    .navLeft {
+        flex-grow: 0;
+    }
+    .navCenter {
+       display: none; /* Hide search bar on tablets */
+    }
+    .navRight {
+        display: none;
+    }
+    .largeNavLinks {
+        display: none;
+    }
+    .menuToggle {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Further adjustments if needed */
+}
+
+.navMobile {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.navMobile.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navMobile .largeNavLinks,
+.navMobile .navRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+.navMobile .navCenter {
+    padding: 1rem;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    transition: opacity 0.3s ease-in-out;
 }

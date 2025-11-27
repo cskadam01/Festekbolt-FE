@@ -1,22 +1,28 @@
-.productDetailContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 80%;
-    padding: 5% 0% 5% 0%;
-}
 .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
     display: flex;
-    flex-direction: column; /* <--- EZ A LÉNYEG */
-    align-items: center;    /* középre hozza a gyerekeket vízszintesen */
-    width: 100%;
-} 
+    flex-direction: column;
+    gap: 3rem;
+}
 
-.description{
-    width: 80%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border: 1px solid #ccc;
+.productDetailContainer {
+    width: 100%;
+}
+
+.description {
+    width: 100%;
+    margin-top: 2rem; /* Add some space above the tabs */
+}
+
+/* On larger screens, you might want to limit the width of the description/tabs */
+@media (min-width: 992px) {
+    .description {
+        /* Optional: If you don't want the tabs to be full-width */
+        /* max-width: 80%; 
+        margin-left: auto;
+        margin-right: auto; */
+    }
 }
 

@@ -18,15 +18,18 @@ export const Cart = () => {
 
 
     {items.length > 0 ? (
-  <>
-    {items.map((item) => (
-      <div key={item.product.id}>
-        <CartProduct item={item} />
+ <div className={style.cartContainer}>
+        <div className={style.productsContainer}>
+          {items.map((item) => (
+            <div key={item.product.id}>
+              <CartProduct item={item} />
+            </div>
+          ))}
+        </div>
+        <div className={style.overallContainer}>
+          <CartOverall total={total} />
+        </div>
       </div>
-    ))}
-
-    <CartOverall total={total} />
-  </>
 ) : (
   <h1 className={style.emptyCart}>A kosarad jelenleg üres</h1>
 )}
