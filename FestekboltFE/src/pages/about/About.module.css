@@ -1,0 +1,118 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.contentWrap {
+    flex: 1;
+}
+
+.hero {
+    position: relative;
+    height: 40vh;
+    background-image: url('../../../public/festek.jpg'); /* Csak egy random kép egy festékről */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.heroText {
+    position: relative;
+    z-index: 1;
+    padding: 1rem;
+}
+
+.heroText h1 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+}
+
+.heroText p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.aboutContent {
+    max-width: 900px;
+    margin: -4rem auto 2rem auto;
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.aboutSection h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ff7a00;
+    display: inline-block;
+}
+
+.aboutSection p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+.aboutImage {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Reszponzív design */
+@media (min-width: 768px) {
+    .aboutContent {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "story image"
+            "mission mission"
+            "team team";
+        align-items: center;
+    }
+
+    .aboutContent .aboutSection:nth-child(1) { grid-area: story; }
+    .aboutContent .aboutSection:nth-child(2) { grid-area: image; }
+    .aboutContent .aboutSection:nth-child(3) { grid-area: mission; }
+    .aboutContent .aboutSection:nth-child(4) { grid-area: team; }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 30vh;
+    }
+    .heroText h1 {
+        font-size: 2.2rem;
+    }
+    .heroText p {
+        font-size: 1rem;
+    }
+    .aboutContent {
+        margin-top: -3rem;
+        padding: 1.5rem;
+    }
+}

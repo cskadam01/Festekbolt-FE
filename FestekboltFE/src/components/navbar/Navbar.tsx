@@ -1,58 +1,95 @@
-import { Link } from "react-router-dom"
-import styles from "./Navbar.module.css"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
 import { GrCart } from "react-icons/gr";
-import { FaRegUser, FaSearch } from "react-icons/fa";
+import { FaRegUser, FaBars, FaTimes } from "react-icons/fa";
+import { SearchBar } from "../searchBar/SearchBar";
+
 export const Navbar = () => {
-return(
-    <>
-        <div className={styles.largeNav}>
-        <div className={styles.largeNavTop}>
-            <div className={styles.brand}>
-            <h1 style={{ color: "#ff9e49ff", marginRight: 6 }}>Festék</h1>
-            <h1>Bolt</h1>
-            </div>
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-            <input type="text" placeholder="Keresés..." className={styles.search} />
-            <FaSearch />
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
-            <div className={styles.actions}>
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isMenuOpen]);
 
-            
-            <Link to="/login" className={styles.navLink}>
-                <FaRegUser />
-                Bejelentkezés
-                </Link>
+    return (
+        <>
+            <nav className={styles.largeNav}>
+                <div className={styles.navLeft}>
+                    <div className={styles.brand}>
+                        <Link to="/" style={{ color: "inherit", textDecoration: "none", display: 'flex' }}>
+                            <h1 style={{ color: "#ff7a00", marginRight: 6 }}>Festék</h1>
+                            <h1>Bolt</h1>
+                        </Link>
+                    </div>
+                    <div className={styles.largeNavLinks}>
+                        <Link to="/">Főoldal</Link>
+                        <Link to="/products">Termékek</Link>
+                        <Link to="/about">Rólunk</Link>
+                        <Link to="/connect">Kapcsolat</Link>
+                        <Link to="/faq">FAQ</Link>
+                    </div>
+                </div>
 
-                <Link to="/cart" className={styles.navLink}>
-                <GrCart />
-                Kosár
-            </Link>
+                <div className={styles.navCenter}>
+                    <SearchBar />
+                </div>
 
-            
-            </div>
-        </div>
+                <div className={styles.navRight}>
+                    <div className={styles.actions}>
+                        <Link to="/login" className={styles.navLink}>
+                            <FaRegUser />
+                            Bejelentkezés
+                        </Link>
+                        <Link to="/cart" className={styles.navLink}>
+                            <GrCart />
+                            Kosár
+                        </Link>
+                    </div>
+                </div>
 
-            <div className={styles.largeNavLinks}> 
-                <Link to={"/"}>
-                    <a >Főoldal</a>
-                        
-                 </Link>
-                <Link to={"/products"}>
-                        <a >Termékek</a>
-                 </Link>
-                 <Link to={"/about"}>
-                        <a >Rólunk</a>
-                 </Link>
-                 <Link to={"/connect"}>
-                       <a >Kapcsolat</a> 
-                 </Link>
-                 <Link to={"/faq"}>
-                       <a>FAQ</a> 
-                 </Link>
-            </div>
-        </div>
-    </>
-)
+                <button className={styles.menuToggle} onClick={toggleMenu}>
+                    {isMenuOpen ? <FaTimes /> : <FaBars />}
+                </button>
 
-
- }
+                {/* Mobile Navigation */}
+                <div className={`${styles.navMobile} ${isMenuOpen ? styles.active : ""}`}>
+                    <div className={styles.largeNavLinks}>
+                        <Link to="/">Főoldal</Link>
+                        <Link to="/products">Termékek</Link>
+                        <Link to="/about">Rólunk</Link>
+                        <Link to="/connect">Kapcsolat</Link>
+                        <Link to="/faq">FAQ</Link>
+                    </div>
+                    <div className={styles.navCenter}>
+                        <SearchBar />
+                    </div>
+                    <div className={styles.navRight}>
+                        <div className={styles.actions}>
+                            <Link to="/login" className={styles.navLink}>
+                                <FaRegUser />
+                                Bejelentkezés
+                            </Link>
+                            <Link to="/cart" className={styles.navLink}>
+                                <GrCart />
+                                Kosár
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            {isMenuOpen && <div className={styles.backdrop} onClick={toggleMenu}></div>}
+        </>
+    );
+};

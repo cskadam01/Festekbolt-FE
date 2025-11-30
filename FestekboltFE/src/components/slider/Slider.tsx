@@ -1,44 +1,64 @@
-import { useState } from "react"
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
-import styles from "./Slider.module.css"
+import { useState, useEffect } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import styles from "./Slider.module.css";
 
 type SliderProps = {
-  images: string[]
-}
+    images: string[];
+};
 
 export const Slider = ({ images }: SliderProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0);
 
+    const toPrevious = () => {
+        const isFirstSlide = currentIndex === 0;
+        const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+        setCurrentIndex(newIndex);
+    };
 
-  //megnézzük, hogy az első képen van, ha igen akkor az utolsó kép indexére ugrunk
-  const toPrevious = () => {
-    const isFirstSlide = currentIndex === 0
-    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1
-    setCurrentIndex(newIndex)
-  }
+    const toNext = () => {
+        const isLastSlide = currentIndex === images.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    };
 
-  //megnézzük, hogy az utolsó képen vagyunk-e, ha igen akkor az első képre ugrunk
-  const toNext = () => {
-    const isLastSlide = currentIndex === images.length - 1
-    const newIndex = isLastSlide ? 0 : currentIndex + 1
-    setCurrentIndex(newIndex)
-  }
+    const goToSlide = (slideIndex: number) => {
+        setCurrentIndex(slideIndex);
+    };
 
-  return (
-    <div className={styles.wrapper}>
+    useEffect(() => {
+        const timer = setTimeout(toNext, 5000); // Auto-play every 5 seconds
+        return () => clearTimeout(timer);
+    }, [currentIndex, toNext]);
 
-      <div className={styles.arrowLeft} onClick={toPrevious}>
-        <IoIosArrowBack className={styles.arrowIcon} />
-      </div>
+    return (
+        <div className={styles.slider}>
+            <div
+                className={styles.slideTrack}
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+                {images.map((imageUrl, index) => (
+                    <div className={styles.slide} key={index}>
+                        <img src={imageUrl} alt={`Slide ${index + 1}`} />
+                    </div>
+                ))}
+            </div>
 
-      <div className={styles.arrowRight} onClick={toNext}>
-        <IoIosArrowForward className={styles.arrowIcon} />
-      </div>
+            <button className={styles.arrowLeft} onClick={toPrevious}>
+                <IoIosArrowBack className={styles.arrowIcon} />
+            </button>
+            <button className={styles.arrowRight} onClick={toNext}>
+                <IoIosArrowForward className={styles.arrowIcon} />
+            </button>
 
-      <div
-        className={styles.slide}
-        style={{ backgroundImage: `url(${images[currentIndex]})` }}
-      ></div>
-    </div>
-  )
-}
+            <div className={styles.dotsContainer}>
+                {images.map((_, slideIndex) => (
+                    <div
+                        key={slideIndex}
+                        className={`${styles.dot} ${currentIndex === slideIndex ? styles.active : ''}`}
+                        onClick={() => goToSlide(slideIndex)}
+                    ></div>
+                ))}
+            </div>
+        </div>
+    );
+};
