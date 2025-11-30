@@ -1,0 +1,179 @@
+.registerPage {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #eef2ff, #f7f7f7);
+    padding: 4rem 1rem;
+}
+
+.registerFormContainer {
+    background-color: #ffffff;
+    padding: 3rem 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+}
+
+.inputGroup {
+    margin-bottom: 1.5rem;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 0.4rem;
+}
+
+.inputGroup input {
+    width: 90%;
+    padding: 0.85rem 1.1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s, transform 0.15s;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: #eb9225;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    transform: scale(1.01);
+}
+
+.registerButton {
+    width: 100%;
+    padding: 0.95rem;
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #fe910b, #8f550d);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.registerButton:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.registerButton:active:not(:disabled) {
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.registerButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loginRedirect {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.loginRedirect span {
+    margin-right: 0.25rem;
+}
+
+.loginLink {
+    font-size: 0.9rem;
+    color: #ff7a00;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.loginLink:hover {
+    color: #e66e00;
+}
+
+.errorText {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    padding: 0.8rem 1.4rem;
+    border-radius: 10px;
+    background: #fee2e2;
+
+    text-align: center;
+    font-size: 0.9rem;
+    color: #dc2626;
+    font-weight: 600;
+
+    animation: slideFromTop 0.35s ease-out, shake 0.3s ease-in-out 0.35s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-4px); }
+    50%  { transform: translateX(4px); }
+    75%  { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+.successText {
+    margin-top: 1.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #16a34a;
+    font-weight: 500;
+}
+
+/* mobil optimalizálás */
+@media (max-width: 480px) {
+    .registerFormContainer {
+        padding: 2.2rem 1.6rem;
+        border-radius: 16px;
+    }
+
+    .title {
+        font-size: 1.9rem;
+    }
+}

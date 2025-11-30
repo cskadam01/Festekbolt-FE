@@ -57,7 +57,7 @@ export const Login = () => {
 
                         <div className={style.createAccount}>
                             <span>Nincs még fiókod? </span>
-                            <Link to="#" className={style.loginLinks}>Fiók létrehozása</Link>
+                            <Link to="/register" className={style.loginLinks}>Fiók létrehozása</Link>
                         </div>
                     </form>
                 </div>

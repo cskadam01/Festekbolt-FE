@@ -13,6 +13,7 @@ import { Login } from "./pages/login/Login";
 import { Faq } from "./pages/faq/Faq";
 import { About } from "./pages/about/About";
 import { Connect } from "./pages/connect/Connect";
+import { Register } from "./pages/register/register";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/about" element={<About />} />
         <Route path="/connect" element={<Connect />} />
+        <Route path="/register" element={<Register/>}/>
       </Routes>
     </Router>
   )
